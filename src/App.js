@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import UserOutput from './UserOutput/UserOutput';
+import UserInput from './UserInput/UserInput';
 
 class App extends Component {
   state = {
@@ -8,7 +10,8 @@ class App extends Component {
       {name: "Tom", age: 36},
       {name: "Jill", age: 30},
       {name: "Joe", age: 28}
-    ]
+    ],
+    username: 'testUsername'
   }
 
   switchNameHandler = (newName) => {
@@ -31,6 +34,15 @@ class App extends Component {
   }
 
   render() {
+    // this is for the button style, use inline styles whenever you want to scope the style
+    // to make sure it only applies to a single type of element within a component
+    const btnStyle = {
+      backgroundColor: '#f4bf75',
+      font: 'inherit',
+      border: '1px solid #e25724',
+      padding: '8px',
+      cursor: 'pointer'
+    };
     // <button onClick={() => this.switchNameHandler('Thomas')}>
     // return is implied but hidden after the fat arrow func only when on one line,
     // otherwise have to use curly braces
@@ -40,7 +52,7 @@ class App extends Component {
       <div className="App">
         <h1>I'm a React App</h1>
         <p>This is working</p>
-        <button onClick={() => this.switchNameHandler('Thomas')}>Switch Name</button>
+        <button style={btnStyle} onClick={() => this.switchNameHandler('Thomas')}>Switch Name</button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}/>
@@ -53,6 +65,9 @@ class App extends Component {
         <Person
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}/>
+        <UserInput />
+        <UserOutput username={this.state.username} />
+        <UserOutput username={this.state.username} />
       </div>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'is this a React App!!!!'));

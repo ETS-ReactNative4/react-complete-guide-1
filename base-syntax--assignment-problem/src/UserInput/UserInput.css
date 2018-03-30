@@ -1,0 +1,21 @@
+.UserInput {
+    margin: 15px auto;
+    width: 60%;
+    border: 1px solid #6edeea;
+    box-shadow: 0 2px 3px #1d4bc1;
+    padding: 16px;
+    text-align: center;
+}
+
+.UserInput h3 {
+    color: #9d33d6;
+    font-size: 28px;
+}
+
+.UserInput input {
+    background-color: #fcf155;
+    height: 22px;
+    width: 180px;
+    cursor: pointer;
+    text-align: center;
+}
