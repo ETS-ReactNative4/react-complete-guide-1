@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import UserOutput from './UserOutput/UserOutput';
-import UserInput from './UserInput/UserInput';
 
 class App extends Component {
   state = {
@@ -11,7 +9,7 @@ class App extends Component {
       {name: "Jill", age: 30},
       {name: "Joe", age: 28}
     ],
-    username: 'testUsername'
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -33,6 +31,13 @@ class App extends Component {
     });
   }
 
+  togglePersonsHandler = () => {
+    // record current showPersons value (from state) in a const before
+    // using setState to assign showPersons property in state the opposite value
+    const currentShowPersonsValue = this.state.showPersons;
+    this.setState({showPersons: !currentShowPersonsValue})
+  }
+
   render() {
     // this is for the button style, use inline styles whenever you want to scope the style
     // to make sure it only applies to a single type of element within a component
@@ -52,22 +57,23 @@ class App extends Component {
       <div className="App">
         <h1>I'm a React App</h1>
         <p>This is working</p>
-        <button style={btnStyle} onClick={() => this.switchNameHandler('Thomas')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}/>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Tommy')}
-          changed={this.nameChangeHandler} >MY Hobbies inclue fortnite
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}/>
-        <UserInput />
-        <UserOutput username={this.state.username} />
-        <UserOutput username={this.state.username} />
+        <button style={btnStyle} onClick={this.togglePersonsHandler}>Toggle Display People</button>
+        { this.state.showPersons ?
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}/>
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Tommy')}
+              changed={this.nameChangeHandler} >MY Hobbies inclue fortnite
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}/>
+        </div> : null
+        }
       </div>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'is this a React App!!!!'));
