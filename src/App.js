@@ -48,6 +48,18 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     };
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map(person => {
+            return <Person name={person.name} age={person.age} />
+          })}
+        </div>
+      );
+    }
     // <button onClick={() => this.switchNameHandler('Thomas')}>
     // return is implied but hidden after the fat arrow func only when on one line,
     // otherwise have to use curly braces
@@ -57,23 +69,9 @@ class App extends Component {
       <div className="App">
         <h1>I'm a React App</h1>
         <p>This is working</p>
-        <button style={btnStyle} onClick={this.togglePersonsHandler}>Toggle Display People</button>
-        { this.state.showPersons ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}/>
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, 'Tommy')}
-              changed={this.nameChangeHandler} >MY Hobbies inclue fortnite
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}/>
-        </div> : null
-        }
+        <button style={btnStyle} onClick={this.togglePersonsHandler}>Toggle People</button>
+      {/*Below is jsx that will only show if persons is set to true*/}
+        {persons}
       </div>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'is this a React App!!!!'));
