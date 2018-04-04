@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -49,15 +50,22 @@ class App extends Component {
     this.setState({showPersons: !currentShowPersonsValue})
   }
 
+
+
   render() {
     // this is for the button style, use inline styles whenever you want to scope the style
     // to make sure it only applies to a single type of element within a component
     const btnStyle = {
-      backgroundColor: '#f4bf75',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid #e25724',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -72,21 +80,38 @@ class App extends Component {
               click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
-              key = {person.id}
+              key ={person.id}
               changed={(event, id) => this.nameChangeHandler(event, person.id)}/>
           })}
         </div>
       );
+
+      btnStyle.backgroundColor = 'red';
+      btnStyle[':hover'] = {
+        backgroundColor: 'yellow',
+        color: 'black'
+      }
     }
     // <button onClick={() => this.switchNameHandler('Thomas')}>
     // return is implied but hidden after the fat arrow func only when on one line,
     // otherwise have to use curly braces
     // also this allows to pass data directly into the function call, but this can
     // be inefficient so dont use it if you dont have to, bind syntax is better
+
+    // since this is all javascript, joining the css classes of this array separated by a space will
+    // create a string of "red bold"
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
+
     return (
       <div className="App">
         <h1>I'm a React App</h1>
-        <p>This is working</p>
+        <p className={classes.join(' ')}>This is working</p>
         <button style={btnStyle} onClick={this.togglePersonsHandler}>Toggle People</button>
       {/*Below is jsx that will only show if persons is set to true*/}
         {persons}
@@ -96,4 +121,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
