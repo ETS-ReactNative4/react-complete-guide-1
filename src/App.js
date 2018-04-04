@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
   state = {
@@ -61,11 +60,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid #e25724',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     };
 
     let persons = null;
@@ -109,7 +104,6 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
       <div className="App">
         <h1>I'm a React App</h1>
         <p className={classes.join(' ')}>This is working</p>
@@ -117,10 +111,9 @@ class App extends Component {
       {/*Below is jsx that will only show if persons is set to true*/}
         {persons}
       </div>
-      </StyleRoot>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'is this a React App!!!!'));
   }
 }
 
-export default Radium(App);
+export default App;
