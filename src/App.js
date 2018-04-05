@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -95,18 +95,18 @@ class App extends Component {
 
     // since this is all javascript, joining the css classes of this array separated by a space will
     // create a string of "red bold"
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>I'm a React App</h1>
-        <p className={classes.join(' ')}>This is working</p>
+        <p className={assignedClasses.join(' ')}>This is working</p>
         <button style={btnStyle} onClick={this.togglePersonsHandler}>Toggle People</button>
       {/*Below is jsx that will only show if persons is set to true*/}
         {persons}
