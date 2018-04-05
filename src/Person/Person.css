@@ -9,8 +9,8 @@
 
 /*this is just one way of using media queries, but theres
 a better way to use them with radium (see app.js) */
-/*@media (min-width: 500px) {
+@media (min-width: 500px) {
     .Person {
         width: 450px;
     }
-}*/
+}

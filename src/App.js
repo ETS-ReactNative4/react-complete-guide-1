@@ -54,16 +54,9 @@ class App extends Component {
   render() {
     // this is for the button style, use inline styles whenever you want to scope the style
     // to make sure it only applies to a single type of element within a component
-    const btnStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid #e25724',
-      padding: '8px',
-      cursor: 'pointer'
-    };
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -81,11 +74,7 @@ class App extends Component {
         </div>
       );
 
-      btnStyle.backgroundColor = 'red';
-      btnStyle[':hover'] = {
-        backgroundColor: 'yellow',
-        color: 'black'
-      }
+      btnClass = classes.Red;
     }
     // <button onClick={() => this.switchNameHandler('Thomas')}>
     // return is implied but hidden after the fat arrow func only when on one line,
@@ -107,7 +96,7 @@ class App extends Component {
       <div className={classes.App}>
         <h1>I'm a React App</h1>
         <p className={assignedClasses.join(' ')}>This is working</p>
-        <button style={btnStyle} onClick={this.togglePersonsHandler}>Toggle People</button>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>Toggle People</button>
       {/*Below is jsx that will only show if persons is set to true*/}
         {persons}
       </div>

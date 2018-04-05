@@ -168,7 +168,7 @@ module.exports = {
                   //[name] will be css class name, [local] will allow css loader to assign
                   //it to a local component (to scope it basically), and the last hash part
                   //is to make sure to give it a unique hash so nothing gets overwritten
-                  localIdentName: '[name]__[local]__{hash:base64:5'
+                  localIdentName: '[name]__[local]__[hash:base64:5]'
                 },
               },
               {
