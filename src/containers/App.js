@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -57,33 +58,25 @@ class App extends Component {
     // to make sure it only applies to a single type of element within a component
 
     let persons = null;
-    let btnClass = '';
+
 
     if (this.state.showPersons) {
       persons = (
-        <div>
           <Persons
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangeHandler} />
-        </div>
       );
 
-      btnClass = classes.Red;
+
     }
-    // <button onClick={() => this.switchNameHandler('Thomas')}>
-    // return is implied but hidden after the fat arrow func only when on one line,
-    // otherwise have to use curly braces
-    // also this allows to pass data directly into the function call, but this can
-    // be inefficient so dont use it if you dont have to, bind syntax is better
-
-    // since this is all javascript, joining the css classes of this array separated by a space will
-    // create a string of "red bold"
-
 
     return (
       <div className={classes.App}>
-        <Cockpit persons={this.state.persons} />
+        <Cockpit
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler} />
         {persons}
       </div>
     );
