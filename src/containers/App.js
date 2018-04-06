@@ -67,13 +67,12 @@ class App extends Component {
             clicked={this.deletePersonHandler}
             changed={this.nameChangeHandler} />
       );
-
-
     }
 
     return (
       <div className={classes.App}>
         <Cockpit
+          appTitle={this.props.title}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler} />
