@@ -19,7 +19,8 @@ class App extends PureComponent {
         {id: '2lkaldk', name: "Jill", age: 30},
         {id: '3lkalab', name: "Joe", age: 28}
       ],
-      showPersons: false
+      showPersons: false,
+      toggleClicked: 0
     }
   }
 
@@ -88,7 +89,12 @@ class App extends PureComponent {
     // record current showPersons value (from state) in a const before
     // using setState to assign showPersons property in state the opposite value
     const currentShowPersonsValue = this.state.showPersons;
-    this.setState({showPersons: !currentShowPersonsValue})
+    this.setState( (prevState, props) => {
+      return {
+        showPersons: !currentShowPersonsValue,
+        toggleClicked: prevState.toggleClicked += 1
+      }
+    });
   }
 
 
@@ -116,7 +122,8 @@ class App extends PureComponent {
           appTitle={this.props.title}
           persons={this.state.persons}
           showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler} />
+          clicked={this.togglePersonsHandler}
+          clickCount={this.state.toggleClicked} />
         {persons}
       </Aux>
     );
