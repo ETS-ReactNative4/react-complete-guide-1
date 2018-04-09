@@ -5,6 +5,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../HOC/Aux';
 import withClass from '../HOC/withClass';
 
+export const AuthContext = React.createContext(false);
+
 
 class App extends PureComponent {
   constructor(props) {
@@ -20,7 +22,8 @@ class App extends PureComponent {
         {id: '3lkalab', name: "Joe", age: 28}
       ],
       showPersons: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false
     }
   }
 
@@ -97,7 +100,9 @@ class App extends PureComponent {
     });
   }
 
-
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  }
 
   render() {
     // this is for the button style, use inline styles whenever you want to scope the style
@@ -111,7 +116,8 @@ class App extends PureComponent {
           <Persons
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangeHandler} />
+            changed={this.nameChangeHandler}
+            isAuthenticated={this.state.authenticated} />
       );
     }
 
@@ -123,8 +129,11 @@ class App extends PureComponent {
           persons={this.state.persons}
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler}
-          clickCount={this.state.toggleClicked} />
-        {persons}
+          clickCount={this.state.toggleClicked}
+          login={this.loginHandler} />
+          <AuthContext.Provider value={this.state.authenticated}>
+            {persons}
+          </AuthContext.Provider>
       </Aux>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'is this a React App!!!!'));
